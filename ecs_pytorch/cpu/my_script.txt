@@ -1,0 +1,3 @@
+
+#!/bin/bash
+echo ECS_CLUSTER=ecs-ec2-training-inference >> /etc/ecs/ecs.config

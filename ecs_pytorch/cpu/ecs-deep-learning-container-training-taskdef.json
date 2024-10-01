@@ -1,0 +1,44 @@
+{
+   "requiresCompatibilities":[
+      "EC2"
+   ],
+   "containerDefinitions":[
+      {
+         "command":[
+            "git clone https://github.com/pytorch/examples.git && python examples/mnist/main.py --no-cuda"
+         ],
+         "entryPoint":[
+            "sh",
+            "-c"
+         ],
+         "name":"pytorch-training-container",
+         "image":"763104351884.dkr.ecr.us-east-1.amazonaws.com/pytorch-training:1.5.1-cpu-py36-ubuntu16.04",
+         "memory":4000,
+         "cpu":256,
+         "essential":true,
+         "portMappings":[
+            {
+               "containerPort":80,
+               "protocol":"tcp"
+            }
+         ],
+         "logConfiguration":{
+            "logDriver":"awslogs",
+            "options":{
+               "awslogs-group":"/ecs/pytorch-training-cpu",
+               "awslogs-region":"us-east-1",
+               "awslogs-stream-prefix":"mnist",
+               "awslogs-create-group":"true"
+            }
+         }
+      }
+   ],
+   "volumes":[
+
+   ],
+   "networkMode":"bridge",
+   "placementConstraints":[
+
+   ],
+   "family":"pytorch"
+}
